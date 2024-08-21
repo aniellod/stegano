@@ -4,7 +4,7 @@ ST_VERSION = "1.0"
 needs_install = False
 
 try:
-    import jpeg-toolbox
+    import jpeg_toolbox
     if stegato.__version__ != ST_VERSION:
         needs_install = True
 except ImportError:

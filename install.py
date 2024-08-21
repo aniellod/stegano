@@ -5,7 +5,7 @@ needs_install = False
 
 try:
     import jpeg_toolbox
-    if stegato.__version__ != ST_VERSION:
+    if stegano.__version__ != ST_VERSION:
         needs_install = True
 except ImportError:
     needs_install = True

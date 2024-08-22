@@ -45,6 +45,8 @@ __version__ = "0.0.2"
 ci = None
 low_vram = False
 
+gradio_version = tuple(map(int, gr.__version__.split(".")))
+
 def text_to_bits(text):
     """Convert text to a binary list."""
     bit_list = []
@@ -313,7 +315,11 @@ def read_stegano_tab():
     with gr.Column():
         with gr.Row():
             # image = gr.Textbox(label="Image Path")  # Using Textbox to accept image path
-            image = gr.File(type="filepath", label="Image Path")
+            if gradio_version >= (4, 0):  # version where "filepath" is supported
+                image = gr.File(type="filepath", label="Image Path")
+            else:
+                image = gr.File(type="file", label="Image Path")
+            #image = gr.File(type="filepath", label="Image Path")
             decoded_message = gr.Textbox(label="Decoded Message")
             seed = gr.Number(label="Seed", value=0)
             button = gr.Button("Reveal", variant='primary')
@@ -322,7 +328,11 @@ def read_stegano_tab():
 def write_stegano_tab():
     with gr.Column():
         with gr.Row():
-            image = gr.File(type="filepath", label="Upload File")
+            if gradio_version >= (4, 0):  # version where "filepath" is supported
+                image = gr.File(type="filepath", label="Upload File")
+            else:
+                image = gr.File(type="file", label="Upload File")
+            #image = gr.File(type="filepath", label="Upload File")
             message = gr.Textbox(lines=5, placeholder="Enter the message to embed")
             seed = gr.Number(label="Seed", value=0)
             download_button = gr.File(label="Download Image with Embedded Message")

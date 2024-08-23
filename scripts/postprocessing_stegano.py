@@ -229,11 +229,11 @@ def create_postprocessing_callback(message, enabled, seed, include_image_info):
                 print("[stegano] Verification failed. Embedded and extracted messages do not match.")
                 print(f"[stegano] Original message: {message_orig}")
                 print(f"[stegano] Extracted message: {extracted_message}")
-            print(f"[stegano] Applied steganography to {filename}.")
+            print(f"[stegano] Applied steganography to {params.filename}.")
         elif params.filename.lower().endswith('.webp'):
             print(f"[stegano] Processing WEBP is not yet supported")
         else:
-            print(f"[stegano] Unsupported file type: {filename}")
+            print(f"[stegano] Unsupported file type: {params.filename}")
     return my_postprocessing_callback
 
 def register_callback_once(message, enabled, seed, include_image_info):

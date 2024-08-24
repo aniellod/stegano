@@ -1,36 +1,67 @@
-# JPEG LSB Steganography Tool
+# Stegano Extension for Automatic1111 and Forge
 
-# Overview
+## Overview
 
-This tool embeds a hidden message into a JPEG image using a technique called Least Significant Bit (LSB) Steganography. The process involves modifying the least significant bits of the image's Discrete Cosine Transform (DCT) coefficients to store the message without significantly altering the image's visual appearance.
-How It Works
+This extension provides functionality for embedding and extracting hidden messages in images using Least Significant Bit (LSB) Steganography. It supports JPEG and PNG formats and integrates with the Automatic1111 web UI.
 
-    Message Conversion: The input message is first converted into a binary format, where each character in the message is represented as an 8-bit binary string.
+The core functionality allows users to hide text messages within image files, utilizing the Discrete Cosine Transform (DCT) coefficients for JPEGs and pixel data for PNGs. The extension is designed to minimize impact on image quality while embedding messages.
 
-    DCT Coefficient Selection: The JPEG image is loaded, and its DCT coefficients are analyzed. Certain coefficients are selected for modification, specifically those that can be altered with minimal impact on the image quality. The coefficients with absolute values of 0 or 1, as well as DC coefficients, are excluded from this selection.
+## Features
 
-    Seed-Based Shuffling: A seed value is provided by the user, which is used to initialize a pseudorandom number generator. This generator shuffles the indices of the selected DCT coefficients. By shuffling these indices, the embedding positions are obfuscated, making it more difficult for an unintended observer to locate and extract the hidden message.
+- **JPEG Steganography**: Hide and extract messages in JPEG images by modifying the DCT coefficients.
+- **PNG Steganography**: Hide and extract messages in PNG images by modifying pixel data.
+- **Seed-Based Shuffling**: Uses a seed to shuffle embedding positions, increasing the difficulty of unauthorized extraction.
+- **Automatic1111 Integration**: Seamlessly integrates into the Automatic1111 web UI for ease of use.
+- **Verification**: Automatic verification that the embedded and extracted messages match.
 
-    Message Embedding: The binary bits of the message are embedded into the least significant bits of the shuffled DCT coefficients. This step subtly modifies the image, encoding the message within the image data.
+## How It Works
 
-    Image Saving: The modified image, containing the hidden message, is saved to a temporary file. The user is then provided with a link to download the image.
+### Message Embedding
 
-# The Role of the Seed
+1. **Message Conversion**: The input message is converted into binary format.
+2. **DCT Coefficient Selection (JPEG)**: Coefficients that minimally impact image quality are selected for modification.
+3. **Pixel Selection (PNG)**: Pixels are selected based on a pseudorandom order defined by the seed.
+4. **Embedding**: The message is embedded by modifying the least significant bits of the selected coefficients or pixels.
+5. **Verification**: After embedding, the message is extracted and compared to the original for verification.
 
-The seed value is crucial for the obfuscation process. It controls the pseudorandom shuffling of the DCT coefficient indices, ensuring that the message bits are embedded in unpredictable locations within the image. The same seed value must be used during the message extraction process to correctly reverse the shuffling and retrieve the embedded message. Without the correct seed, even if an observer suspects that a message is hidden within the image, they would have a much harder time extracting it.
-Usage
+### Message Extraction
 
-#    Embedding and Hiding a Message:
-        Upload a JPEG image using the file upload interface.
-        Enter the message you want to embed in the image.
-        Provide a numerical seed for shuffling the embedding locations.
-        Click the "Embed Message" button to start the embedding process.
-        Download the image with the embedded message using the provided link.
+1. **Seed-Based Retrieval**: The same seed used for embedding is required to retrieve the message.
+2. **Reversal of Embedding**: The message is extracted by reversing the shuffling and reading the least significant bits.
 
-#    Extracting and Revealing a Message:
-        To extract the message, use the same seed that was used for embedding. The extraction tool will reverse the shuffling and retrieve the hidden message from the image.
+## Installation
 
-# Important Notes
+1. Clone this repository into the `extensions` directory of your Automatic1111 installation:
+    ```bash
+    git clone https://github.com/yourusername/stegano-extension.git extensions/stegano-extension
+    ```
 
-    No Encryption: The message is not encrypted before embedding. For added security, consider encrypting the message before embedding it.
-    Image Quality: The tool is designed to minimize the impact on image quality, but very large messages may still cause noticeable changes.
+2. Restart the Automatic1111 Web UI.
+
+3. The Stegano extension will appear in the UI under the **Postprocessing** section.
+
+## Usage
+
+### Embedding a Message
+
+1. **Upload an Image**: Choose a JPEG or PNG image to embed a message.
+2. **Enter a Message**: Input the message to be hidden in the image.
+3. **Provide a Seed**: Enter a numerical seed for shuffling the embedding positions.
+4. **Click Embed**: The message will be embedded, and a download link will be provided for the modified image.
+
+### Extracting a Message
+
+1. **Upload the Image**: Choose the image that contains the hidden message.
+2. **Enter the Seed**: Use the same seed that was provided during the embedding process.
+3. **Click Reveal**: The hidden message will be extracted and displayed.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+```plaintext
+MIT License
+
+Copyright (c) 2020 Daniel Lerch Hostalot. All rights reserved.
+Implementation for Automatic 1111 & PNG steganography Copyright (c) 2024 Aniello Di Meglio. All rights reserved.
+

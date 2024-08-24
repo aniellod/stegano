@@ -249,7 +249,7 @@ def register_callback_once(message, enabled, seed, include_image_info):
             callback_registered = False
 
 class ScriptPostprocessingStegano(scripts_postprocessing.ScriptPostprocessing):
-    name = "Steganographic content"
+    name = "Steganography"
     order = 9999
 
     def ui(self):

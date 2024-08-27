@@ -1,4 +1,4 @@
-# Stegano Extension for Automatic1111 and Forge
+# Steganographic Extension for Automatic1111 and Forge
 
 ## Overview
 

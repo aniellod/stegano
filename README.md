@@ -40,6 +40,8 @@ The core functionality allows users to hide text messages within image files, ut
 
 3. The Stegano extension will appear in the UI under the **Postprocessing** section.
 
+![Screenshot of a the A1111 settings showing how to enable postprocessing for steganography.](./images/settings.png)
+
 ## Usage
 
 ### Embedding a Message

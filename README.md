@@ -14,6 +14,8 @@ The core functionality allows users to hide text messages within image files, ut
 - **Automatic1111 Integration**: Seamlessly integrates into the Automatic1111 web UI for ease of use.
 - **Verification**: Automatic verification that the embedded and extracted messages match.
 
+**Only works on Linux at the moment**
+
 ## How It Works
 
 ### Message Embedding

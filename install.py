@@ -28,7 +28,7 @@ if missing_libraries:
 
 try:
     import jpeg_toolbox
-    if jpeg_toolbox.__version__ != ST_VERSION:
+    if jpeg_toolbox.version != ST_VERSION:
         needs_install = True
 except ImportError:
     needs_install = True
